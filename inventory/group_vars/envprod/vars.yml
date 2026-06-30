@@ -1,0 +1,20 @@
+---
+# Engine-only example. Platform / alert-api / annotation vars are intentionally
+# omitted since this example repo only installs & updates engine stations.
+prefix: "fr"
+pyronear_version: latest
+api_dns: "alertapi.example.org"
+
+# OpenVPN (engine client install)
+openvpn_server_dns: "bastion{{ prefix }}.example.org"
+openvpn_server_ansible_host: "fr_openvpn"
+openvpn_ca_password: "example-openvpn-ca-password"
+
+# mediamtx stream server
+mediamtx_server_ip: 10.0.0.2
+
+# S3 storage used by the engine (FAKE values)
+S3_ENDPOINT_URL: https://s3.example.cloud.net/
+S3_ACCESS_KEY: example-s3-access-key
+S3_SECRET_KEY: example-s3-secret-key
+S3_REGION: gra

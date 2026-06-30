@@ -1,0 +1,78 @@
+---
+app_name: "engine"
+project_name: "pyro-engine"
+pyro_engine_git_ref: "v1.0.12"
+pyro_engine_docker_tag: "1.0.12"
+
+ansible_user: pi
+
+engine_json_schema: |
+  {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "patternProperties": {
+      "^.*$": {
+        "type": "object",
+        "properties": {
+          "brand": {
+            "description": "Brand of the device, required.",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of the device, either 'static' or 'ptz'.",
+            "enum": ["static", "ptz"],
+            "type": "string"
+          },
+          "azimuth": {
+            "description": "Azimuth value, required for static devices.",
+            "type": "number"
+          },
+          "id": {
+            "description": "Camera id in the API database. required.",
+            "type": "number"
+          },
+          "azimuths": {
+            "description": "Required list of azimuths for ptz devices.",
+            "items": {
+              "type": "number"
+            },
+            "type": ["array", "null"]
+          },
+          "poses": {
+            "description": "Required list of poses for ptz devices.",
+            "items": {
+              "type": "number"
+            },
+            "type": ["array", "null"]
+          },
+          "token": {
+            "description": "Optional token, but required to be present (can be empty).",
+            "type": "string"
+          }
+        },
+        "required": ["brand", "type", "token", "id"],
+        "if": {
+          "properties": {
+            "type": {
+              "const": "static"
+            }
+          }
+        },
+        "then": {
+          "required": ["azimuth"]
+        },
+        "else": {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "ptz"
+              }
+            }
+          },
+          "then": {
+            "required": ["azimuths", "poses"]
+          }
+        }
+      }
+    }
+  }

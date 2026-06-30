@@ -1,0 +1,14 @@
+# NOTE: this is an EXAMPLE repo — every secret in it is FAKE. The vault
+# password (.vault_passwrd) is committed on purpose so the example runs
+# out-of-the-box. In a REAL private pi-manager-X repo you would gitignore it.
+
+# The SSH PRIVATE key that reaches your Pi is real — never commit it.
+id_rsa
+
+roles/infothrill.rpi_boot_config
+roles/pyronear.openvpn
+*__pycache__*
+*.pem
+.vscode
+.idea
+.DS_Store

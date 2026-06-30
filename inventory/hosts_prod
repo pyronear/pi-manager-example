@@ -1,0 +1,46 @@
+all:
+  hosts:
+    # --- Engine station (example with a default local IP) ---
+    example-station:
+      ansible_host: 192.168.1.42
+      reverse_ssh_port: 2256
+
+    # --- Backing servers (fake values, only here so the engine
+    #     playbooks that reference them resolve) ---
+    fr_openvpn:
+      ansible_host: 10.0.0.1
+    fr_mediamtx_server:
+      ansible_host: 10.0.0.2
+    reverse_ssh_server:
+      ansible_host: 10.0.0.2
+
+  children:
+    engine_servers:
+      hosts:
+        example-station:
+
+    openvpn:
+      hosts:
+        fr_openvpn:
+
+    mediamtx_server:
+      hosts:
+        fr_mediamtx_server:
+
+    # Declared (empty) so check_vars and the playbooks keep working
+    alert_server:
+      hosts: {}
+    platform_py_server:
+      hosts: {}
+    platform_react_server:
+      hosts: {}
+    annotation_server:
+      hosts: {}
+    pi_zero:
+      hosts: {}
+
+    envprod:
+      children:
+        engine_servers:
+        openvpn:
+        mediamtx_server:

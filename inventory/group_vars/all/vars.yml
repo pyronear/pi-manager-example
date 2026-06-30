@@ -1,0 +1,18 @@
+---
+# Fake/example values — replace in your own private pi-manager-X repo.
+SENTRY_DSN: 'https://examplekey@oexample.ingest.sentry.io/0000000'
+ansible_user: ubuntu
+ansible_python_interpreter: /usr/bin/python3
+collocation: false
+
+# Attributes to override
+prefix: "fr"
+openvpn_server_host: "vpn.example.org"
+ca_password: "example-ca-password"
+
+cert_resolver_mail: "contact@example.org"
+cert_resolver_url: "https://acme-v02.api.letsencrypt.org/directory"
+
+ssh_authorized_keys:
+  - felix_to_pyrobastion
+  - mateo_to_pyrobastion
